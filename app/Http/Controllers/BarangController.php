@@ -62,6 +62,6 @@ class BarangController extends Controller
     {
         $data = Barang::find($id);
         $data->delete();
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Data berhasil dihapus!');
     }
 }

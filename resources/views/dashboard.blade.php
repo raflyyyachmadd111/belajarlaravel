@@ -17,6 +17,11 @@
 
     <div>
         <div class="container">
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <table class="table table-hover">
