@@ -14,4 +14,42 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Harga Barang</th>
+                                <th scope="col">Jumlah Barang</th>
+                                <th scope="col">Stok Barang</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($data as $item)
+                            <tr>
+                                <th scope="row">{{ $item->id }}</th>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->harga }}</td>
+                                <td>{{ $item->jumlah }}</td>
+                                <td>
+                                    <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('barang.destroy', $item->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>
