@@ -21,11 +21,15 @@
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
-
             @endif
-            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Tambah Data</button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labellebdy="exampleModalLabel" area-hidden="true">
+            <div class="mb-3">
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Tambah
+                    Data</button>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labellebdy="exampleModalLabel"
+                area-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -82,41 +86,57 @@
                                 <td>{{ $item->harga }}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#barangModal{{ $item->id }}">Edit</a>
-                                    <form action="{{ route('barang.destroy', $item->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                    </form>
+                                    <div class="row">
+                                        <div class="d-flex justify-content-around">
+                                            <div class="col">
+                                                <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#barangModal{{ $item->id }}">Edit</a>
+                                            </div>
+                                            <div class="col">
+                                                <form action="{{ route('barang.destroy', $item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
-                            <div class="modal fade" id="barangModal{{ $item->id }}" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="barangModal{{ $item->id }}" tabindex="-1"
+                                aria-labelledby="itemModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="itemModalLabel">Detail Barang</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
-                                        <form method="post" action="{{ route('barang.update', ['barang'=> $item->id]) }}">
+                                        <form method="post"
+                                            action="{{ route('barang.update', ['barang'=> $item->id]) }}">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label for="itemName" class="form-label">Nama Barang</label>
-                                                    <input type="text" class="form-control" name="nama" placeholder="Kopi Slukatan" value="{{ $item->nama }}">
+                                                    <input type="text" class="form-control" name="nama"
+                                                        placeholder="Kopi Slukatan" value="{{ $item->nama }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="itemName" class="form-label">Hrga Barang</label>
-                                                    <input type="number" class="form-control" name="harga" placeholder="1000" value="{{ $item->harga }}">
+                                                    <input type="number" class="form-control" name="harga"
+                                                        placeholder="1000" value="{{ $item->harga }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="itemName" class="form-label">Jumlah Barang</label>
-                                                    <input type="number" class="form-control" name="jumlah" placeholder="222" value="{{ $item->jumlah }}">
+                                                    <input type="number" class="form-control" name="jumlah"
+                                                        placeholder="222" value="{{ $item->jumlah }}">
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Tutup</button>
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
                                         </form>
