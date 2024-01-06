@@ -82,7 +82,7 @@
                                 <td>{{ $item->harga }}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>
-                                    <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#barangModal{{ $item->id }}">Edit</a>
                                     <form action="{{ route('barang.destroy', $item->id) }}" method="post">
                                         @csrf
                                         @method('delete')
@@ -90,6 +90,39 @@
                                     </form>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="barangModal{{ $item->id }}" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="itemModalLabel">Detail Barang</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form method="post" action="{{ route('barang.update', ['barang'=> $item->id]) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="itemName" class="form-label">Nama Barang</label>
+                                                    <input type="text" class="form-control" name="nama" placeholder="Kopi Slukatan" value="{{ $item->nama }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="itemName" class="form-label">Hrga Barang</label>
+                                                    <input type="number" class="form-control" name="harga" placeholder="1000" value="{{ $item->harga }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="itemName" class="form-label">Jumlah Barang</label>
+                                                    <input type="number" class="form-control" name="jumlah" placeholder="222" value="{{ $item->jumlah }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>
