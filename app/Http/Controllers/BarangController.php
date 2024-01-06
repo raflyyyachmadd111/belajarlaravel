@@ -28,7 +28,14 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'jumlah' => $request->jumlah,
+        ];
+
+        Barang::insert($data);
+        return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
